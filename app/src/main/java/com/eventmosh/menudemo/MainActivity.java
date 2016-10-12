@@ -8,13 +8,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    PopMenu mPopMenu;
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        textView= (TextView) findViewById(R.id.text);
+        mPopMenu = (PopMenu) findViewById(R.id.popMenu);
+
+        mPopMenu.setOnItemMenuListener(new PopMenu.OnItemMenuListener() {
+            @Override
+            public void onItemMenuClick(int position) {
+                Toast.makeText(MainActivity.this, "新闻" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -25,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MenuActivity.class));
             }
         });
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"Hello",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
